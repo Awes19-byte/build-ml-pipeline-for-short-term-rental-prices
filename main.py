@@ -53,9 +53,9 @@ def go(config: DictConfig):
             # Preprocess data columns
             _ = mlflow.run(
                 os.path.join(
-                    root_path,
+                    hydra.utils.get_original_cwd(),
                     "src",
-                    "basic_cleaning"),
+                    "cleaning"),
                 "main",
                 parameters={
                     "input_artifact": "sample.csv:latest",
@@ -70,7 +70,7 @@ def go(config: DictConfig):
             # Run the data tests
             _ = mlflow.run(
                 os.path.join(
-                    root_path,
+                    hydra.utils.get_original_cwd(),
                     "src",
                     "data_check"),
                 "main",
@@ -87,7 +87,7 @@ def go(config: DictConfig):
             # Train-test split
             _ = mlflow.run(
                 os.path.join(
-                    root_path,
+                    hydra.utils.get_original_cwd(),
                     "components",
                     "train_val_test_split"),
                 "main",
@@ -115,7 +115,7 @@ def go(config: DictConfig):
             # Train the model
             _ = mlflow.run(
                 os.path.join(
-                    root_path,
+                    hydra.utils.get_original_cwd(),
                     "src",
                     "train_random_forest"),
                 "main",
@@ -131,7 +131,7 @@ def go(config: DictConfig):
         if "test_regression_model" in active_steps:
             _ = mlflow.run(
                 os.path.join(
-                    root_path,
+                    hydra.utils.get_original_cwd(),
                     "components",
                     "test_regression_model"),
                 "main",

@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 
 import mlflow
 import json
+from mlflow.models.signature import infer_signature
 
 import pandas as pd
 import numpy as np
